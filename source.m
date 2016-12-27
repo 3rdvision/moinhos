@@ -88,7 +88,7 @@ while 1
     RR=Feed/PF; % Relação redução
     %     S=[id,Material];
     tabelamat=table(n,Material);disp(tabelamat) %mostrar tabela dos materiais
-    id=input('De acordo com a tabela cima, introduza o nr. correspondente ao material desejado: ');
+    id=input('De acordo com a tabela acima, introduza o nr. correspondente ao material desejado: ');
     %     fprintf('\nMaterial selecionado:'); disp(S(id,:))
     if moinho==1 %barras
         fprintf('\nWork index do respetivo material no moinho de barras:\n');
