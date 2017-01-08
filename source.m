@@ -88,6 +88,7 @@ while 1
     disp('');
     disp('Introduza todos valores no formato numérico ou decimal.');
     disp(' ');
+    % \/ inputs do utilizador
     moinho=input('Deseja um moinho com barras (1) ou com bolas (2)? ');
     Q=input('Introduza a capacidade desejada em ton/h: ');
     Feed=input('Introduza o valor em micron do calibre k80 à alimentação: ');
