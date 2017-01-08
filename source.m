@@ -79,8 +79,17 @@ n=[1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21;22;23;24;25;26;27;28;29
 %%%%%%%%%%%%%%%%%%%%%%
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%       Inicio do programa       %
+%%%%%$$$$$$$$$$%%%%%%%%%%%%%%%%%%%
+% \/ Ciclo p/ o dimensionamento  %
+% \/ de moinhos até interrupção  %
+% \/  dada pelo utilizador com   %
+% \/         Ctrl + C            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 while 1
     
+    %%% \/ esquema visual de inicio do programa
     disp('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
     disp('~~~~~~~Dimensionador de moinhos de barras e de bolas~~~~~~~~');
     disp('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
@@ -88,16 +97,16 @@ while 1
     disp('');
     disp('Introduza todos valores no formato numérico ou decimal.');
     disp(' ');
+    %%% /\ esquema visual inicio do programa
+    
     % \/ inputs do utilizador
     moinho=input('Deseja um moinho com barras (1) ou com bolas (2)? ');
     Q=input('Introduza a capacidade desejada em ton/h: ');
     Feed=input('Introduza o valor em micron do calibre k80 à alimentação: ');
     PF=input('Introduza o valor em micron do calibre k80 desejado para o produto final: ');
-    RR=Feed/PF; % Relação redução
-    tabelamat=table(n,Material);disp(tabelamat) %mostrar tabela dos materiais
+    RR=Feed/PF; % Calcular relação redução pelos inputs feed e PF
+    tabelamat=table(n,Material);disp(tabelamat) % Mostrar tabela dos materiais
     id=input('Consultando a tabela acima, introduza o nr. para o material desejado: ');
-        
-    
     if moinho==1 %se barras
         fprintf('\nWork index do respetivo material no moinho de barras:\n');
         disp(MWi(id,2));
