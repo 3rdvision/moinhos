@@ -4,7 +4,7 @@
 %%%%%%%%%                 Autor:                     %%%%%%%%%%
 %%%%%%%%%%%%%%%%%   Daniel Vieira Azevedo   %%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%       FEUP-DEM        %%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%  v0.1a22.11.16  %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%  v0.2a22.11.16  %%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%        %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -54,7 +54,6 @@
 % % %                                      -
 % % % Feito no âmbito da disciplina Tratamento de Matérias Primas e Resíduos I
 % % % do curso de Licenciatura em Ciências de Engenharia - Engenharia de Minas de Geo-Ambiente
-
 clc
 MWi=[17.9000000000000 12.2000000000000;27.4000000000000 11.4000000000000;10.8000000000000 12.5000000000000;19.6000000000000 7;10.1000000000000 13.4000000000000;5.80000000000000 5.70000000000000;14.5000000000000 10.8000000000000;9.90000000000000 13.7000000000000;11 -1;15.4000000000000 9.80000000000000;18 15.9000000000000;15.1000000000000 17.6000000000000;13.6000000000000 12.1000000000000;33.5000000000000 16.9000000000000;11.6000000000000 17.5000000000000;13.9000000000000 14.2000000000000;17.2000000000000 16;18.3000000000000 10.1000000000000;12.7000000000000 11;11.7000000000000 11;20.4000000000000 8.40000000000000;7.20000000000000 -1;7.90000000000000 7.60000000000000;17.9000000000000 7.10000000000000;16.5000000000000 -1;9.90000000000000 16.3000000000000;11.1000000000000 12.5000000000000;9 9.30000000000000;14.5000000000000 15.9000000000000;13.2000000000000 11.4000000000000;10.2000000000000 10.6000000000000;10 12.3000000000000;10.3000000000000 12.6000000000000;12.5000000000000 12.4000000000000;12.8000000000000 14.3000000000000;15.5000000000000 19.2000000000000;9.80000000000000 11;13.4000000000000 7.90000000000000;11.8000000000000 14.1000000000000;12.4000000000000 11.3000000000000;13.9000000000000 10.9000000000000;11.6000000000000 11.8000000000000;12.5000000000000 14.9000000000000;14.6000000000000 15.2000000000000;17 17.5000000000000;11.4000000000000 10.9000000000000;11 12.8000000000000;14.6000000000000 13.3000000000000;10.9000000000000 12.9000000000000;27.4000000000000 18.1000000000000;10.1000000000000 8.70000000000000;11.2000000000000 12.3000000000000;14.4000000000000 14.4000000000000;14 -1;28.4000000000000 9.80000000000000;14.3000000000000 8.90000000000000;13.6000000000000 12.8000000000000;10.4000000000000 -1;23.8000000000000 13;22.1000000000000 -1;12 19.3000000000000;15.3000000000000 -1;38.2000000000000 27];
 % /\ nota: para os valores -1, não há dados
@@ -88,7 +87,7 @@ while 1
     RR=Feed/PF; % Relação redução
     %     S=[id,Material];
     tabelamat=table(n,Material);disp(tabelamat) %mostrar tabela dos materiais
-    id=input('De acordo com a tabela acima, introduza o nr. correspondente ao material desejado: ');
+    id=input('De acordo com a tabela cima, introduza o nr. correspondente ao material desejado: ');
     %     fprintf('\nMaterial selecionado:'); disp(S(id,:))
     if moinho==1 %barras
         fprintf('\nWork index do respetivo material no moinho de barras:\n');
@@ -116,7 +115,7 @@ while 1
         if MWi(id,2)<0 % caso não existam dados na experiência
             disp('Não há dados registados deste material no moinho de barras.'); input('O programa não pode proseguir. Pressione enter para terminar.'); return;
         else
-            Wi=MWi(id,2);
+            Wi=MWi(id,1);
         end
         
     end
@@ -223,7 +222,7 @@ while 1
             %%% comprimento das barras
             L=MICIRPbar(idm,4); % comprimento das barras
             RR0=8+(5*L)/D;
-            if (RR0-2)<=RR && (RR0+2)<=RR % barras dentro do intervalo
+            if (RR0-2)<=RR && (RR0+2)>=RR % barras dentro do intervalo
                 EF6=1+((RR-RR0)^2)/150;
                 EF=[EF,EF6];
             else % barras fora do intervalo
@@ -297,7 +296,7 @@ while 1
                 return
             end
             disp('L/D é maior que 1.5, escolhendo o próximo moinho e reaplicando os cálculos...');
-            disp('Próximo moinho selecionado:');fprintf('\n    Diâmetro  Compr.  Potência  \n');;if moinho==1;disp(MICIRPbar(idm,:));else;disp(MICIRPbol(idm,:));end;
+            disp('Próximo moinho selecionado:');fprintf('\n    Diâmetro  Compr.  Potência  \n\n');;if moinho==1;disp(MICIRPbar(idm,:));else;disp(MICIRPbol(idm,:));end;
         end
         
         
