@@ -55,6 +55,7 @@
 % % % Feito no âmbito da disciplina Tratamento de Matérias Primas e Resíduos I
 % % % do curso de Licenciatura em Ciências de Engenharia - Engenharia de Minas de Geo-Ambiente
 % % % Função do programa: Dimensionamento de um moinho de barras ou de bolas para máxima eficiência.
+% % % Código actualizado em www.moinhos.tk
 clc
 
 muro=sprintf ( '_|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|\n___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|__\n_|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|\n___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|__\n_|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|\n___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|__\n');
@@ -119,6 +120,7 @@ while 1
     if moinho==1 %se barras
         pcircuito=input('A alimentação do moinho é proveniente de um circuito de britagem em circuito aberto (1) ou em circuito fechado (2)? '); % circuito que antecede - para o cálculo do fator de correcção
     end
+    % /\ fim dos inputs pelo utilizador
     
     disp(muro); % separar com muro para inicio das iterações
     
@@ -174,7 +176,7 @@ while 1
     flag=0;
     while flag~=1
         
-        % 5 - calcular fatores de correcção EF1,EF2,EF3...
+        % \/ 5 - calcular vetor fatores de correcção EF1,EF2,EF3...
         EF=[];
         
         
@@ -281,8 +283,10 @@ while 1
         EFn=EF';
         fprintf('\nFactores de correcção para o moinho acima selecionado:\n')
         tabelaEF=table(EFs,EFn,Descricao);disp(tabelaEF);
-        disp('Feito. Aplicando os factores de correcção, a potência (W) necessária para garantir a fragmentação dessa quantidade de material é de: ');
+        % /\ Fim da aplicação dos factores de correcção
         
+        % \/ Recalculando nova potência necessária com novos EFs
+        disp('Feito. Aplicando os factores de correcção, a potência (W) necessária para garantir a fragmentação dessa quantidade de material é de: ');
         Pc=P*prod(EF);  % multiplicar por todos os EF(i)
         disp(Pc);
         
@@ -294,10 +298,11 @@ while 1
             L=Pc/(MICIRPbol(idm,3)/MICIRPbol(idm,1));
         end
         
-        %7- Verificar relação L/D < 1.5 , se não verificar, selecionar
-        %outro moinho e voltar a 5
+        
         disp('L/D= '); disp(L/D)
         
+        %7- Verificar de erros e da aceitação da relação L/D < 1.5 - se não verificar, selecionar
+        % próximo moinho (potência seguinte) e voltar ao passo 5
         if idm>s_MICIRPbar && moinho==1 || idm>s_MICIRPbol && moinho~=1  % se exceder limite de iterações mostrar erro
             disp('Erro de ciclo infinito - dados errados e/ou não concordantes.');
             return
@@ -306,6 +311,7 @@ while 1
         
         if L/D<1.5
             flag=1;
+            
         else
             idm=idm+1;
             if idm>s_MICIRPbar && moinho==1 || idm>s_MICIRPbol && moinho~=1  % se exceder limite de iterações mostrar erro
@@ -322,7 +328,7 @@ while 1
     % Fim do ciclo de iterações, mostrar muro
     disp(muro);
     
-    % 8 - FIM! Anunciar a solução (caso encontrada)
+    % 8 - FIM! Anunciar a solução
     fprintf(2,'SOLUÇÃO ENCONTADA!\n');
     disp('Moinho ideal:');fprintf('\n    Diâmetro  Compr.  Potência  \n');;if moinho==1;disp(MICIRPbar(idm,:));else;disp(MICIRPbol(idm,:));end;
     fprintf('Sendo que o comprimento deste moinho terá de ser ajustado para %g metros.\n',L);
