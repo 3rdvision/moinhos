@@ -56,7 +56,9 @@
 % % % do curso de Licenciatura em Ciências de Engenharia - Engenharia de Minas de Geo-Ambiente
 % % % Função do programa: Dimensionamento de um moinho de barras ou de bolas para máxima eficiência.
 % % % Código actualizado em www.moinhos.tk
-clc
+% % % ou
+% % % Github: https://raw.githubusercontent.com/3rdvision/moinhos/master/source.m
+clear ; clc
 
 muro=sprintf ( '_|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|\n___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|__\n_|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|\n___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|__\n_|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|\n___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|__\n');
 % /\ muro visual de separação
