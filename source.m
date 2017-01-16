@@ -301,23 +301,26 @@ while 1
         
         disp('L/D= '); disp(L/D)
         
-        %7- Verificar de erros e da aceitação da relação L/D < 1.5 - se não verificar, selecionar
-        % próximo moinho (potência seguinte) e voltar ao passo 5
-        if idm>s_MICIRPbar && moinho==1 || idm>s_MICIRPbol && moinho~=1  % se exceder limite de iterações mostrar erro
+        % \/ se exceder limite de iterações mostrar erro
+        if idm>s_MICIRPbar && moinho==1 || idm>s_MICIRPbol && moinho~=1  
             disp('Erro de ciclo infinito - dados errados e/ou não concordantes.');
             return
             
         end
+        % /\ se exceder limite de iterações mostrar erro
         
-        if L/D<1.5
-            flag=1;
+        %7- Verificação da aceitação da relação L/D < 1.5 -- se não verificar, selecionar
+        % próximo moinho (potência seguinte) e voltar ao passo 5
+        
+        if L/D<1.5 % se verificar
+            flag=1; %aceitar moinho
             
-        else
-            idm=idm+1;
+        else % se não verificar
             if idm>s_MICIRPbar && moinho==1 || idm>s_MICIRPbol && moinho~=1  % se exceder limite de iterações mostrar erro
                 disp('Final do Ciclo - Moinho na relação L/D<1.5 não encontrado para os dados fornecidos');
                 return
             end
+            idm=idm+1; % escolher próximo moinho (id do anterior + 1)
             disp('L/D é maior que 1.5, escolhendo o próximo moinho e reaplicando os cálculos...');
             disp('Próximo moinho selecionado:');fprintf('\n    Diâmetro  Compr.  Potência  \n\n');;if moinho==1;disp(MICIRPbar(idm,:));else;disp(MICIRPbol(idm,:));end;
         end
